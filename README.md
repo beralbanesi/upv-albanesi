@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# UPV ( Usalo Publicalo Vendelo)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+E-commerce UPV
 
 ## Available Scripts
 
