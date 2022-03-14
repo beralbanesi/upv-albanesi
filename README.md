@@ -1,6 +1,6 @@
 # UPV ( Usalo Publicalo Vendelo)
 
-E-commerce UPV
+E-commerce UPV, usa publica y vende
 
 ## Available Scripts
 

@@ -1,13 +1,17 @@
-header.main-header{
-    width: 100%; 
-    display:flex;
-    padding: 10px 25px;
-    box-shadow: 1px 5px 15px #81818129;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    }
-    
+  
+ 
+ul.navbar > li > button {
+    background: seagreen;
+}
+
+.container-logo{
+    width: 10%;
+}
+
+ul.navbar > li > div {
+    background-color: rgba(59, 182, 112, 0.404);
+}
+
 ul.navbar
 {
  list-style: none;
@@ -18,9 +22,6 @@ ul.navbar li
 {
  margin-right: 15px;
 }
-    
-    
-.custom-btn{
-    background-color: seagreen;
-  }
+   
+   
 

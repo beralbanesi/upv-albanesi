@@ -1,13 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar';
+import { StyledEngineProvider } from '@mui/material';
 
-function App() {
-  //jsx
+function App() {  
   return (
-    <div className="App">     
+    <StyledEngineProvider injectFirst>
       <NavBar/>   
-    </div>
+    </StyledEngineProvider>
   );
 }
 

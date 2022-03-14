@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './NavBar.css';
+import  './NavBar.css'; 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { color } from '@mui/system';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,36 +55,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+          <IconButton className="customIconButton" >     
+             <MenuIcon />
           </IconButton>
           <div className='container-logo'>
             <img src="logo.png" className="img-header" width={120}/>    
          </div>
          <ul className="navbar">
-            <li> <Button className="custom-btn" variant="contained">Home</Button>   </li>
-            <li> <Button className="custom-btn" variant="contained">Productos</Button>   </li>
-            <li> <Button className="custom-btn" variant="contained">Nosotros</Button>   </li>
-            <li> <Button className="custom-btn" variant="contained">Contacto</Button>   </li>
-         </ul>
+            <li> <Button variant="contained">Home</Button>   </li>
+            <li> <Button  variant="contained">Productos</Button>   </li>
+            <li> <Button  variant="contained">Nosotros</Button>   </li>
+            <li> <Button  variant="contained">Contacto</Button>   </li>
+         
+         <li>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              placeholder="Buscar…"
+              inputProps={{ 'aria-label': 'search'}              
+            }
             />
           </Search>
+          </li></ul>
         </Toolbar>
       </AppBar>
     </Box>
