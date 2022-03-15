@@ -55,8 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   return (
-    <Box>
-      <AppBar position="static">
+    <Box className="customBox">
+      <AppBar position="static"  className='customBox'>
         <Toolbar>
           <IconButton className="customIconButton" >     
              <MenuIcon />
@@ -70,18 +70,21 @@ export default function NavBar() {
             <li> <Button  variant="contained">Nosotros</Button>   </li>
             <li> <Button  variant="contained">Contacto</Button>   </li>
          
-         <li>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar…"
-              inputProps={{ 'aria-label': 'search'}              
-            }
-            />
-          </Search>
-          </li></ul>
+            <li>
+                <Search>
+                    <SearchIconWrapper>
+                         <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                      placeholder="Buscar…"
+                         inputProps={{ 'aria-label': 'search'}              
+                     }
+                         />
+                </Search>
+          
+          </li>
+          
+          </ul>
         </Toolbar>
       </AppBar>
     </Box>
