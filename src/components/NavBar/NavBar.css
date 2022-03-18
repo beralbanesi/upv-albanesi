@@ -1,0 +1,106 @@
+ 
+ul.navbar > li > button {
+    background: #ff7200;
+}
+
+.container-logo{
+    width: 10%;
+}
+
+.img-header{
+    width: 120px;
+}
+
+ul.navbar > li > div {
+   
+    background-color: rgba(255, 136, 0, 0.755); 
+    color: orangered;
+}
+
+ul.navbar
+{
+ list-style: none;
+ display: flex;
+}
+    
+ul.navbar li 
+{
+ margin-right: 15px;
+}
+
+div > header.customBox{
+    color: #ffa500;
+    background-color: #ffa500;
+}
+
+/*.container-search {
+    background-color: whitesmoke;}
+    
+    color: orangered;*/
+   /*{ width: 300%; 
+    margin-left: 400px;
+    margin-top: 10px;
+    border-radius: 5px; 
+}*/
+
+
+/*Estilo para cuando clickea en los botones de la NavBar se vea*/
+ul.navbar > li > .custom-btn:hover{
+    background-color: rgb(89, 138, 194);
+} 
+
+ul.navbar > li > svg.custom-iconCart{
+color: primary;
+
+}
+ 
+/*Estilo para componente SearchBar*/
+.custom-Search-Bar{
+    border-radius: 5px;
+    align-self: center;
+    color: orangered;
+    background-color: whitesmoke;  
+
+}
+
+ul.navbar > li > div > .custom-input{
+    color: white;
+}
+
+ul.navbar > li > div > .custom-input:hover{
+    color: orangered;
+    background-color: rgba(245, 245, 245, 0.5); 
+} 
+
+/*Estilo para el boton del carrito*/
+/* ul.navbar > li > button.redondo{
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-style: none;
+    display: flex;
+} */
+
+ul.navbar > li > .custom-icon-cart:hover{
+    background-color: rgb(89, 138, 194);
+    
+} 
+
+button > img.img-carrito{    
+  height :25px ;
+  width : 25px
+
+}
+
+/*Cambia color del icono a blanco*/
+ul.navbar > li > button > svg{   
+    fill: white; 
+}
+
+
+.subidc { 
+    vertical-align:sub;           /* /subindice/ */
+    font-size:6pt;
+    font-weight: bold;
+  }
