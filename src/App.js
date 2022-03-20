@@ -6,8 +6,7 @@ function App() {
   return (
     <div className="App">   
       <NavBar/>  
-      <ItemListContainer title="Productos en Oferta"/>
-         
+      <ItemListContainer title="-.- PRODUCTOS EN OFERTA -.-"/>
     </div>
   );
 }

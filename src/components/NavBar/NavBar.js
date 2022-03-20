@@ -86,7 +86,7 @@ export default function NavBar() {
                 />
               </Search>
             </li>
-           - <li >              
+            <li >              
                  <CartWidget/>
             </li> 
             

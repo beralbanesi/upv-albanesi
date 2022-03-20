@@ -1,6 +1,9 @@
  
 ul.navbar > li > button {
-    background: #ff7200;
+    background: black;
+    border: white;
+    border-style: solid;
+    border-width: 2px;
 }
 
 .container-logo{
@@ -8,13 +11,13 @@ ul.navbar > li > button {
 }
 
 .img-header{
-    width: 120px;
+    width: 80px;
 }
 
 ul.navbar > li > div {
    
-    background-color: rgba(255, 136, 0, 0.755); 
-    color: orangered;
+    background-color: rgba(248, 138, 35, 0.6); 
+    color: white;
 }
 
 ul.navbar
@@ -29,8 +32,7 @@ ul.navbar li
 }
 
 div > header.customBox{
-    color: #ffa500;
-    background-color: #ffa500;
+    background-color: rgb(30, 30, 30);
 }
 
 /*.container-search {
@@ -46,15 +48,16 @@ div > header.customBox{
 
 /*Estilo para cuando clickea en los botones de la NavBar se vea*/
 ul.navbar > li > .custom-btn:hover{
-    background-color: rgb(89, 138, 194);
+    background-color: #107BD4;
 } 
 
 ul.navbar > li > svg.custom-iconCart{
 color: primary;
 
 }
- 
-/*Estilo para componente SearchBar*/
+ /**** SEARCH BAR ****/
+
+ /*Componente SearchBar*/
 .custom-Search-Bar{
     border-radius: 5px;
     align-self: center;
@@ -62,45 +65,32 @@ color: primary;
     background-color: whitesmoke;  
 
 }
-
+/* color input de la barra de busqueda */
 ul.navbar > li > div > .custom-input{
+    border-radius: 5px;
+    background-color: #1f4274aa; /* color del que queda la lupa */
     color: white;
 }
 
 ul.navbar > li > div > .custom-input:hover{
-    color: orangered;
-    background-color: rgba(245, 245, 245, 0.5); 
+    color: white;
 } 
 
-/*Estilo para el boton del carrito*/
-/* ul.navbar > li > button.redondo{
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border-style: none;
-    display: flex;
-} */
-
+/**** CARRITO DE COMPRAS ****/
+/* color de fondo cuando se pone el cursor arriba del carrito */
 ul.navbar > li > .custom-icon-cart:hover{
-    background-color: rgb(89, 138, 194);
-    
+    background-color: #107BD4;
 } 
-
-button > img.img-carrito{    
-  height :25px ;
-  width : 25px
-
-}
 
 /*Cambia color del icono a blanco*/
 ul.navbar > li > button > svg{   
     fill: white; 
 }
 
-
+/* para el numero de cantidad de productos del carrito*/
 .subidc { 
     vertical-align:sub;           /* /subindice/ */
     font-size:6pt;
     font-weight: bold;
+    color: white;
   }
