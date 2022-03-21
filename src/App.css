@@ -3,28 +3,81 @@
 }
 
 /*Estilo para Card*/
-div > div > div.card-item{
+.card-item{
   float:left;
   border: 1px solid #ababab;
   margin-top: 1%;
   margin-left: 1%;
   box-shadow: 1px 1px 5px #0000002b;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   width: 20%;
+  background-color: rgb(240, 225, 210);
 }
 
-div > div > div > img{
-  height: 50%;
-  width: 50%;
+.card-item-title{
+  font-size: larger;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
-div > div > div > p{
+.card-item-description{
+  font-size: medium;
+  font-weight: 350;
+}
+
+div > img{
+  height: 80%;
+  width: 80%;
+  border-image: 5px;
+  border-color: black;
+}
+
+div > p{
   height: 50px;
 }
 
-div > div > div > button{
+div > button{
   width: 100px;
   font-size: large;
+}
+
+/**/
+.itemCount-btn{
+  width: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 5px;
+  background-color: #107BD4;
+  color: white;
+}
+
+.itemCount-btn:hover{
+  cursor: pointer;
+}
+
+.itemCount-container{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.addRemove-container{
+  width: 100%;
+  font-weight: bold;
+}
+
+.addCart-btn{
+  background-color: #1F4374;
+  color: white;
+  margin-top: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  height: 40px;
+}
+
+.addCart-btn:hover{
+  cursor: pointer;
 }

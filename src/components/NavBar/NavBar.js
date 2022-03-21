@@ -3,16 +3,12 @@ import  './NavBar.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import MenuIcon from '@mui/icons-material/Menu';
-
 import CartWidget from "../CartWidget";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-
 import SearchIcon from '@mui/icons-material/Search';
-import SearchBar from './SearchBar';
+
 
 
 /*Barra de busqueda*/
@@ -60,7 +56,7 @@ const Search = styled('div')(({ theme }) => ({
 
 
 
-export default function NavBar() {
+export default function NavBar({totalCount}) {
   return (
     <Box className="customBox">
      
@@ -86,8 +82,8 @@ export default function NavBar() {
                 />
               </Search>
             </li>
-           - <li >              
-                 <CartWidget/>
+            <li >              
+                 <CartWidget totalCount={totalCount}/>
             </li> 
             
           </ul>
