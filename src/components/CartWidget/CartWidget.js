@@ -1,7 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; 
-import  './NavBar/NavBar.css'; 
-/*import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";*/
+import  '../NavBar/NavBar.css'; 
+
 
 
 export default function CartWidget({totalCount}){

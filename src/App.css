@@ -81,3 +81,18 @@ div > button{
 .addCart-btn:hover{
   cursor: pointer;
 }
+
+/*Estilo botones del Detail */
+.showDetail-btn{
+height: fit-content;
+color: #ababab;
+font-size: 12px;
+border-radius: 5px;
+}
+
+.showDetail-container{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+}

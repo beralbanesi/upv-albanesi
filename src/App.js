@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import React, { useState } from 'react';
+import ProductsLists from './components/ProductsLists/ProductsLists';
 
 function App() {  
 
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">   
       <NavBar totalCount={totalCount}/>  
-      <ItemListContainer title="-.- PRODUCTOS EN OFERTA -.-" onTotalize={onTotalize}/>
+      <ProductsLists onTotalize={onTotalize}/>
     </div>
   );
 }
