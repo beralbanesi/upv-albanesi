@@ -1,0 +1,41 @@
+.star
+{
+margin: 2px;
+display: inline-block;
+width: 0px;
+height: 0px;
+border-right: 9px solid transparent;
+border-bottom: 8px solid #FFCC00;
+border-left: 9px solid transparent;
+transform: rotate(35deg);
+cursor: pointer;
+}
+
+.star:before {
+position: absolute;
+display: inline-block;
+left:-6px;
+top:-4px;
+width: 0px;
+height: 0px;
+border-right: 3px solid transparent;
+border-bottom: 7px solid #FFCC00;
+border-left: 3px solid transparent;
+content: '';
+transform: rotate(-34deg);
+cursor:pointer;
+}
+
+.star:after {
+position: absolute;
+display: inline-block;
+left:-9px;
+top:0px;
+width: 0px;
+height: 0px;
+border-right: 9px solid transparent;
+border-bottom: 8px solid #FFCC00;
+border-left: 9px solid transparent;
+content: '';
+transform: rotate(-70deg);
+cursor:pointer;}
