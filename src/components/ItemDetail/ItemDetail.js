@@ -23,7 +23,7 @@ const ItemDetail = ({selectedProduct}) => {
                 <li><span className="selected-card-item-description">Puntuación:</span> {starItems} </li>                         
                 <li><span className="selected-card-item-description">Stock disponible: {stock}</span></li> 
             </ul>     
-
+            <button className="addCart-btn" >Comprar</button>
         </div> 
     </div>     
        );   

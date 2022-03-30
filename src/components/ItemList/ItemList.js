@@ -19,9 +19,12 @@ const ItemList = ({category, onTotalize, onSelectItem}) => {
     });
   };
 
-useEffect(() => {
-  getProducts().then((data) => {setProducts(data)  })},[] )
-            //.catch((error) => {console.log(error)})
+  useEffect(() => {
+    getProducts().then((data) => {setProducts(data)
+      }).finally( () => {
+        console.log ("Fin de la llamada" )
+         })
+        },[] )
     
   return(
     <div className="container-cards">   

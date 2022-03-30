@@ -54,8 +54,6 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
 
-
-
 export default function NavBar({totalCount}) {
   return (
     <Box className="customBox">

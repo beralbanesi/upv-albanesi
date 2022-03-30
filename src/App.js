@@ -13,17 +13,21 @@ function App() {
       setTotalCount(totalCount + qty);       
   }; 
 
-  const onSelectItem = (itemId) => {   
-    console.log('dentro de app:' );
-    console.log(itemId);
+  const onSelectItem = (itemId) => {      
     setSelectedItem(itemId);
 }; 
+
+  
 
   return (
     <div className="App">   
       <NavBar totalCount={totalCount}/>  
       <ProductsLists onTotalize={onTotalize} onSelectItem={onSelectItem}/>
-      <ItemDetailContainer id={selectedItem}/>
+      {/* <ItemDetailContainer id={selectedItem}/> */}
+     
+      
+      <ItemDetailContainer id={1}/>
+     
     </div>
   );
 }

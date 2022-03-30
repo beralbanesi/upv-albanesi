@@ -8,11 +8,11 @@ const mockProducts = MockData();
  
   const [selectedProduct, setSelectedProduct] = useState(0);
 
-  useEffect(() => {
-    console.log('entro al use effect');
-    console.log(mockProducts);
-     getSelectedProduct().then((data) => {setSelectedProduct(data) }) 
-    }, [{selectedProduct}] )
+  useEffect(() => {    
+    getSelectedProduct().then((data) => {setSelectedProduct(data)
+    }).finally(() => {
+     console.log ("termino la llamada")
+   })}, [] )
 
   const getSelectedProduct = () => {
     return new Promise((resolve, reject) => {   
@@ -26,7 +26,7 @@ const mockProducts = MockData();
    
     return(  
         <>
-        {id!=0 &&     
+        {selectedProduct!=0 &&     
         <ItemDetail selectedProduct={selectedProduct} /> 
         } 
         </>               

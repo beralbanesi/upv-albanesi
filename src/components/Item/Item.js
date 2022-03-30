@@ -10,7 +10,7 @@ export default function Item({productData, onTotalize, onSelectItem})
     }
     const onClickDetail = () => {
         onSelectItem(productData.id);
-        console.log(productData);
+        
     }
 
     const {id, title, description, price, image, stock} = productData;
@@ -23,8 +23,6 @@ export default function Item({productData, onTotalize, onSelectItem})
             <button className="detail-btn" onClick={onClickDetail}>Mostrar detalle</button>
             <ItemCount stock={stock} initialValue={1} onAdd={onAdd} />
         </div>
-
-
     );
 
 }
