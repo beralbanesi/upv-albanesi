@@ -1,6 +1,31 @@
 # UPV ( Usalo Publicalo Vendelo)
 
-E-commerce UPV, usa publica y vende
+E-commerce UPV es un sitio destinado a facilitar la venta de productos usados.
+
+
+## Motivacion del proyecto
+
+UPV es el proyecto final realizado dentro del contexto de curso de React en la plataforma CoderHouse.
+
+
+## Librerias externas utilizadas
+
+ Se utilizo la libreria Material UI (https://mui.com/)
+
+
+ ## Resumen
+
+ Para el proyecto decidi implementar el NavBar utilizando la libreria MUI con su componente AppBar (@mui/material/AppBar). Esta contiene:
+ ### El logo del sitio
+  Al clikear el logo del sitio muestra todos los productos. Esto lo hice utilizando useNavigate.
+ ### Componente MenuPopup de la libreria MUI (material-ui-popup-state)
+  Decidi manejar la navegacion con componentes Link.
+ ### Componente CartWidget 
+  Lo implemente usando componente IconButton de la libreria (@mui/material/IconButton)
+ ### Componente Search de la libreria MUI (@mui/icons-material/Search)
+  Decidi utilizar el componente Search que provee la libreria MUI (@mui/icons-material/Search).
+
+
 
 ## Available Scripts
 

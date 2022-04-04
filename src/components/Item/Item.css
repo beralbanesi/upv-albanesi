@@ -1,0 +1,50 @@
+/*Estilo para Card*/
+.card-item{
+    float:left;
+    border: 1px solid #ababab;
+    margin-top: 2%;
+    margin-left: 2%;
+    box-shadow: 1px 1px 5px #0000002b;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    width: 18%;
+    background-color: rgb(240, 225, 210);
+  }
+
+.card-item-title{
+    font-size: large;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 15px;
+
+  }
+
+  .card-item-price{
+    font-style: oblique;
+    font-size: medium;
+    margin-bottom: 10px;
+  }
+
+.card-item-description{
+    font-size: medium;
+    font-weight: 350;
+}
+
+.card-item-img{
+    width: 80%;
+}
+  
+.detail-btn{
+    text-decoration: none;
+    padding: 5px;
+    margin-top: 10%;
+    width: fit-content;
+    height: 20px;
+    font-size: small;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 3px;
+    background-color: #000000d7;
+    color: white;
+  }

@@ -1,18 +1,20 @@
 import ItemDetail from "../ItemDetail/ItemDetail";
 import React, { useEffect, useState } from 'react';
-import MockData from "../../MockData/MockData";
+import mockProducts from "../../Utils/data";
 
 const  ItemDetailContainer = ({id}) => {
 
-const mockProducts = MockData();
  
   const [selectedProduct, setSelectedProduct] = useState(0);
+  
+  useEffect(() => {
+    
+     getSelectedProduct().then((data) => {setSelectedProduct(data)
+     }).finally(() => {
+      console.log ("termino la llamada")
+    })}, [] )
 
-  useEffect(() => {    
-    getSelectedProduct().then((data) => {setSelectedProduct(data)
-    }).finally(() => {
-     console.log ("termino la llamada")
-   })}, [] )
+ 
 
   const getSelectedProduct = () => {
     return new Promise((resolve, reject) => {   

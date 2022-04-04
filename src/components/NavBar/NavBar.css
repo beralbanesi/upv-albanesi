@@ -1,6 +1,11 @@
- 
+ul.navbar{
+    list-style: none;
+    display: flex;
+}
+    
 ul.navbar > li > button {
-    background: black;
+    margin-left: 20px;
+    background: rgb(30, 30, 30);
     border: white;
     border-style: solid;
     border-width: 2px;
@@ -12,6 +17,7 @@ ul.navbar > li > button {
 
 .img-header{
     width: 80px;
+    cursor: pointer;
 }
 
 ul.navbar > li > div {
@@ -20,36 +26,27 @@ ul.navbar > li > div {
     color: white;
 }
 
-ul.navbar
-{
- list-style: none;
- display: flex;
-}
-    
-ul.navbar li 
-{
- margin-right: 15px;
-}
-
 div > header.customBox{
     background-color: rgb(30, 30, 30);
 }
 
-/*.container-search {
-    background-color: whitesmoke;}
-    
-    color: orangered;*/
-   /*{ width: 300%; 
-    margin-left: 400px;
-    margin-top: 10px;
-    border-radius: 5px; 
-}*/
+/*menu desplegable MEnuPopupMenu*/
+div > div > ul{
+    background: rgb(30, 30, 30);
+    color: white;
+}
+
+div > div > ul > li > a{
+    text-decoration: none;
+    color: white;
+}
 
 
 /*Estilo para cuando clickea en los botones de la NavBar se vea*/
-ul.navbar > li > .custom-btn:hover{
+ul.navbar > li > button:hover{
     background-color: #107BD4;
 } 
+
 
 ul.navbar > li > svg.custom-iconCart{
 color: primary;
@@ -86,6 +83,23 @@ ul.navbar > li > .custom-icon-cart:hover{
 ul.navbar > li > button > svg{   
     fill: white; 
 }
+
+/*Para los LINKS*/
+/* ul.navbar > li > a{ 
+text-decoration: none;
+    color: white;
+} */
+/*Para  el menu de la navbar*/
+ul.navbar > li > button { 
+    text-decoration: none;
+        color: white;
+    }
+ul.navbar > li > button > a { 
+    text-decoration: none;
+    color: white;
+}
+
+
 
 /* para el numero de cantidad de productos del carrito*/
 .subidc { 

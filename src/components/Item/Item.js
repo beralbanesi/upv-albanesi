@@ -1,26 +1,20 @@
-
 import ItemCount from "../ItemCount/ItemCount";
-
-export default function Item({productData, onTotalize, onSelectItem})
+import './Item.css';
+import {Link} from 'react-router-dom';
+export default function Item({productData})
 {
-
-    const onAdd = (qty) => {            
-        onTotalize(qty);
+    const onAdd = (qty) => {
         alert(`Se agregaron ${qty}  productos`);
     }
-    const onClickDetail = () => {
-        onSelectItem(productData.id);
-        
-    }
-
-    const {id, title, description, price, image, stock} = productData;
+   
+    const {id, title, price, image, stock} = productData;
     return(
        
         <div className="card-item">
-            <img  src={image}/>
+            <img className="card-item-img" src={image}/>
             <div className="card-item-title">{title}</div>
-            <div>Precio: ${price}</div>
-            <button className="detail-btn" onClick={onClickDetail}>Mostrar detalle</button>
+            <div className="card-item-price">Precio: ${price}</div>
+            <Link to={`/productos/${id}`} className="detail-btn" >Mostrar detalle</Link>
             <ItemCount stock={stock} initialValue={1} onAdd={onAdd} />
         </div>
     );

@@ -1,12 +1,15 @@
 
+import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
 
-const  ProductsLists = ({onTotalize,onSelectItem}) => {
+
+const  ProductsLists = () => {
+
+    const {category} = useParams()
 
     return(
         <>
-        <ItemList category={"Ropa"} onTotalize={onTotalize} onSelectItem={onSelectItem}/>  
-       {/*  <ItemList category={"Electrodomésticos"} onTotalize={onTotalize}/>    */}
+            <ItemList category={category} />  
         </>   
     );
 

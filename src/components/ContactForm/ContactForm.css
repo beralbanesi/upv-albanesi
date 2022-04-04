@@ -1,0 +1,42 @@
+
+.main-container{
+    width: fit-content;
+    margin-left: 15%;
+}
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 150px 400px;
+    grid-gap: 10px;
+    background-color: #6A6A7A;
+    color: #6A6A7A;
+  }
+  
+.elem-group {
+    text-align: left;
+    width: fit-content;
+    background-color: #6A6A7A;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 100%;
+}
+
+.form-btn{
+    background-color: black;
+    color: white;
+    width: 150px;
+}
+
+input{
+    width: 300px;
+}
+
+textarea{
+    min-width: 300px;
+}
+select{
+     width: 308px;
+}
+
+

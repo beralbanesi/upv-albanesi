@@ -1,0 +1,27 @@
+
+.main-containerAU{
+    width: fit-content;
+    margin-left: 8%;
+}
+
+.logo-imgAU{
+    width: fit-content;
+}
+  
+.wrapperAU {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    grid-gap: 10px;
+    background-color: whitesmoke;
+    color: black;
+  }
+  
+.elementAU {
+    text-align: left;
+    width: fit-content;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 100%;
+}

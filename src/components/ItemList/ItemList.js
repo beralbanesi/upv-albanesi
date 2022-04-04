@@ -1,41 +1,60 @@
 import Item from "../Item/Item";
 import React, { useEffect, useState } from 'react';
-import MockData from "../../MockData/MockData";
+import mockProducts from "../../Utils/data";
+import { useParams } from "react-router-dom";
 
-const ItemList = ({category, onTotalize, onSelectItem}) => {
+const ItemList = ({category = 'listAll'}) => {
 
-  const mockProducts = MockData();
+const [products, setProducts] = useState([]);
+
+// filtra productos por categoria
+const findProductByCategory = (products,category) => {
   
-  const [products, setProducts] = useState([]);
+    if (category == 'listAll'){
+      setProducts([])
+      return setProducts(products)
+    }
+    else {
+      products.map((product) => {
+        if(product.category === category) {
+            return setProducts(products => [...products, product]);
+          }
+         }
+      )
+    }
+}
 
-  const getProducts = () => {
+const getProducts = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if(mockProducts.length>0)
-          resolve(mockProducts);          
-        else
-          reject('error');
+       if(mockProducts.length>0)  
+           resolve(mockProducts); 
+       else
+         reject('error');
       }, 2000);
     });
   };
 
-  useEffect(() => {
-    getProducts().then((data) => {setProducts(data)
-      }).finally( () => {
-        console.log ("Fin de la llamada" )
-         })
-        },[] )
-    
+useEffect(() => {
+  
+  setProducts([])
+  getProducts().then((data) => {    
+        findProductByCategory(data,category)
+    }).finally( () => {      
+      console.log ("Fin de la llamada" )
+       })
+      },[category])
+            
+
   return(
     <div className="container-cards">   
-        <h2>{`Productos de la categoría ${category}`}</h2>       
-        {  /* products.length ? ( products.map((product) => {
-                     return( <Item key={product.id} productData={product} onTotalize={onTotalize} onSelectItem={onSelectItem}></Item>)
-                          )
-                      : <p>cargando productos..</p>* */
-            (products.length>0)&&products.map((product) => {
-             return( <Item key={product.id} productData={product} onTotalize={onTotalize} onSelectItem={onSelectItem}></Item>)
-         })}
+        {(category != "listAll") && <h2>Productos de la categoría {category}</h2>}       
+        {
+            (products.length>0)?products.map((product) => {
+             return( <Item key={product.id} productData={product} ></Item>)
+            })
+            :<p>Cargando productos...</p>
+        }
     </div>
   );
 }
