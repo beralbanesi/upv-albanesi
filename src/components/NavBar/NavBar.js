@@ -29,6 +29,24 @@ export default function NavBar({ totalCount }) {
     console.log('click: ' + e.target.value)
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      let categories = ["Accesorios", "Remeras", "Pantalones", "Zapatillas"];
+      if (categories.includes(e.target.value)) {
+        // switch(e.target.value){
+        //   case 'Accesorios':{
+        //     console.log('presiono enter: ' + e.target.value);
+        //     navigate(`./categoria/${e.target.value}`);
+        //   }
+        //   default:
+        navigate(`./categoria/${e.target.value}`);
+        console.log(' entro por default presiono enter: ' + e.target.value)
+      }
+
+
+    }
+  }
+
 
   return (
     <Box className="customBox">
@@ -45,7 +63,7 @@ export default function NavBar({ totalCount }) {
               <CartWidget totalCount={totalCount} action={handleCartClick} />
             </li>
             <li>
-              <Search handleInputClick={handleInputClick} />
+              <Search handleInputClick={handleInputClick} handleKeyPress={handleKeyPress} />
             </li>
           </ul>
         </Toolbar>

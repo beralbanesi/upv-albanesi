@@ -1,7 +1,6 @@
 import Item from "../Item/Item";
 import React, { useEffect, useState } from 'react';
 import mockProducts from "../../Utils/data";
-import { useParams } from "react-router-dom";
 
 const ItemList = ({category = 'listAll'}) => {
 

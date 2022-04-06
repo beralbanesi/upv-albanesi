@@ -2,7 +2,7 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Search = ({handleInputClick}) => {
+const Search = ({handleInputClick, handleKeyPress}) => {
     /*Barra de busqueda*/
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -52,7 +52,8 @@ const Search = ({handleInputClick}) => {
                 <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase className='custom-input'
-                onClick={(e) => { handleInputClick(e) }}               
+                onClick={(e) => { handleInputClick(e) }}  
+                onKeyPress={(e) => {handleKeyPress(e)}}             
                 placeholder="Buscar..."
                 inputProps={{ 'aria-label': 'search' }}
             />
