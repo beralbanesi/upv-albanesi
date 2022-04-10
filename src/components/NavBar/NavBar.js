@@ -9,10 +9,10 @@ import MenuPopup from '../MenuPopup/MenuPopup';
 import Search from '../Search/Search';
 
 
-export default function NavBar({ totalCount }) {
+export default function NavBar() {
   /*Menu desplegable */
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
 
   const navigate = useNavigate();
 
@@ -33,17 +33,9 @@ export default function NavBar({ totalCount }) {
     if (e.key === 'Enter') {
       let categories = ["Accesorios", "Remeras", "Pantalones", "Zapatillas"];
       if (categories.includes(e.target.value)) {
-        // switch(e.target.value){
-        //   case 'Accesorios':{
-        //     console.log('presiono enter: ' + e.target.value);
-        //     navigate(`./categoria/${e.target.value}`);
-        //   }
-        //   default:
         navigate(`./categoria/${e.target.value}`);
         console.log(' entro por default presiono enter: ' + e.target.value)
       }
-
-
     }
   }
 
@@ -53,17 +45,17 @@ export default function NavBar({ totalCount }) {
       <AppBar position="static" className='customBox'>
         <Toolbar>
           <div className='container-logo'>
-            <img src="../img/logo.png" className="img-header" onClick={handleLogoClick} />
+            <img src="../img/logo.png" alt='Logo UPV' className="img-header" onClick={handleLogoClick} />
           </div>
           <ul className="navbar">
             <li>
               <MenuPopup />
-            </li>
-            <li >
-              <CartWidget totalCount={totalCount} action={handleCartClick} />
-            </li>
+            </li>            
             <li>
               <Search handleInputClick={handleInputClick} handleKeyPress={handleKeyPress} />
+            </li>
+            <li >
+              <CartWidget action={handleCartClick} />
             </li>
           </ul>
         </Toolbar>

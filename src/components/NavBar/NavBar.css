@@ -16,13 +16,13 @@ ul.navbar > li > button {
 }
 
 .img-header{
-    width: 80px;
+    width: 70px;
     cursor: pointer;
 }
 
 ul.navbar > li > div {
    
-    background-color: rgba(248, 138, 35, 0.6); 
+    /* background-color: rgba(248, 138, 35, 0.6);  */
     color: white;
 }
 
@@ -99,12 +99,3 @@ ul.navbar > li > button > a {
     color: white;
 }
 
-
-
-/* para el numero de cantidad de productos del carrito*/
-.subidc { 
-    vertical-align:sub;           /* /subindice/ */
-    font-size:6pt;
-    font-weight: bold;
-    color: white;
-  }

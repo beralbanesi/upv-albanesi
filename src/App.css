@@ -22,3 +22,16 @@ div > button{
   width: 100px;
   font-size: large;
 }
+
+
+.continue-btn {
+  background-color: #1F4374;
+  color: white;
+  margin-top: 5px;
+  margin-left: 5%;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 40px;
+  width: 160px;
+}
+

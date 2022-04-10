@@ -6,7 +6,7 @@ import ItemList from "../ItemList/ItemList";
 const  ProductsLists = () => {
 
     const {category} = useParams()
-
+ 
     return(
         <>
             <ItemList category={category} />  

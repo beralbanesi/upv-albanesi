@@ -1,10 +1,10 @@
 import './ItemDetail.css';
 import mockData from '../../Utils/data';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import ItemCount from '../ItemCount/ItemCount';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import CartContext from "../../context/CartContext";
 
 const ItemDetail = () => {
   const { id } = useParams()
@@ -13,6 +13,8 @@ const ItemDetail = () => {
   const [selectedProduct, setSelectedProduct] = useState({})
   const [cartValue, setCartValue] = useState(0) // useState([])  //[{ idProducto: 0, count: 0} ]
 
+  // consumir el contexto
+  const {addProductToCart} = useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const ItemDetail = () => {
   // recuperar el producto que viene como parametro
   const filterProductById = (products, id) => {
     return products.map((product) => {
-      if (product.id == id) {
+      if (product.id === id) {
         setSelectedProduct(product)
       }
     })
@@ -43,7 +45,8 @@ const ItemDetail = () => {
 
   const onAdd = (qty) => {
     setCartValue(qty)
-    alert(`Se agregaron ${qty} productos al carrito.`);
+    addProductToCart(selectedProduct,qty);   
+   
   }
 
   return (
@@ -51,10 +54,10 @@ const ItemDetail = () => {
       <div className="product-container">
         <div className="product-content">
           <div className="column1">
-            <img className="selected-card-item-img" src={selectedProduct.image} />
+            <img className="selected-card-item-img" alt='Imagen de producto' src={selectedProduct.image} />
           </div>
           <div className="column2">
-            <div className="selected-card-item-category">>>> {selectedProduct.category}</div>
+            <div className="selected-card-item-category">&gt;&gt;&gt; {selectedProduct.category}</div>
             <div className="selected-card-item-title">{selectedProduct.title}</div>
             <div className="selected-card-item-price">Precio: ${selectedProduct.price}   </div>
             <ul className='selected-card-item-ul'>
@@ -74,7 +77,7 @@ const ItemDetail = () => {
               <li><span className="selected-card-item-description">Colores disponibles:
                 <ul className='color-info'>
                   {selectedProduct.colors?.map((color, i) => {
-                    return <li key={color.id} style={{ background: `${color.hex}`, listStyle: `none` }}><a href="#" ></a></li>
+                    return <li key={color.id} style={{ background: `${color.hex}`, listStyle: `none` }}><a href="#" >&nbsp;</a></li>
                   })
                   }
                 </ul>
@@ -82,10 +85,9 @@ const ItemDetail = () => {
               </li>
 
             </ul>
-            {/* <button className="addCart-btn"  >Comprar</button> */}
-            <div>
-              {/* Desafio 31-03 */}
-              {(cartValue == 0) ? <ItemCount stock={selectedProduct.stock} initialValue={1} onAdd={onAdd} />
+          
+            <div>           
+              {(cartValue === 0) ? <ItemCount stock={selectedProduct.stock} initialValue={1} onAdd={onAdd} />
                 : <div className='finish-container'><button className="finish-btn" onClick={() => { navigate(`/cart`) }} >Finalizar compra</button></div>
 
               }
