@@ -17,7 +17,7 @@ const ItemList = ({ category = 'listAll' }) => {
     }
     else {
       products.map((product) => {
-        if (product.category === category) {
+        if (product.category == category) {
           return setProducts(products => [...products, product]);
         }
       }

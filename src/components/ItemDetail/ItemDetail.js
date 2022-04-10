@@ -27,7 +27,7 @@ const ItemDetail = () => {
   // recuperar el producto que viene como parametro
   const filterProductById = (products, id) => {
     return products.map((product) => {
-      if (product.id === id) {
+      if (product.id == id) {
         setSelectedProduct(product)
       }
     })
@@ -87,7 +87,7 @@ const ItemDetail = () => {
             </ul>
           
             <div>           
-              {(cartValue === 0) ? <ItemCount stock={selectedProduct.stock} initialValue={1} onAdd={onAdd} />
+              {(cartValue == 0) ? <ItemCount stock={selectedProduct.stock} initialValue={1} onAdd={onAdd} />
                 : <div className='finish-container'><button className="finish-btn" onClick={() => { navigate(`/cart`) }} >Finalizar compra</button></div>
 
               }

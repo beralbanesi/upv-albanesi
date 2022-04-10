@@ -10,7 +10,7 @@ const CartProvider = ({ children }) => {
 
     // Devuelve true si el producto que se quiere agregar ya esta en el cart
     const isInCart = (product) => {
-        let exist = cartProducts.find(cartProduct => cartProduct.product.id === product.id)
+        let exist = cartProducts.find(cartProduct => cartProduct.product.id == product.id)
 
         return exist
     }
