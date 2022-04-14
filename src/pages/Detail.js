@@ -1,9 +1,11 @@
 import ItemDetail from "../components/ItemDetail/ItemDetail";
 
 const DetailPage = () => {
- return (
-   <ItemDetail/>
- );
+  return (
+    <div className="detail">
+      <ItemDetail />
+    </div>
+  );
 
 }
 export default DetailPage;

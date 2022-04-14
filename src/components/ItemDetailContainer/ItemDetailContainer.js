@@ -9,8 +9,10 @@ const  ItemDetailContainer = ({id}) => {
   
   useEffect(() => {
     
-     getSelectedProduct().then((data) => {setSelectedProduct(data)
-     }).finally(() => {
+     getSelectedProduct()
+     .then((data) => {setSelectedProduct(data)})
+     .catch((err) => console.log(err))  
+     .finally(() => {
       console.log ("termino la llamada")
     })}, [] )
 

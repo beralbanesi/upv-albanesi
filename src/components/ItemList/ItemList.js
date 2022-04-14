@@ -57,7 +57,7 @@ const ItemList = ({ category = 'listAll' }) => {
         (products.length > 0) ? products.map((product) => {
           return (<Item key={product.id} productData={product} ></Item>)
         })
-          : <CircularProgress />
+          : <div className="circular-progress"><CircularProgress /></div>
       }
     </div>
   );

@@ -24,17 +24,23 @@ export default function NavBar() {
     navigate(`./brand`)
   };
 
-  const handleInputClick = (e) => {
-    /*busque y direccione a la categoria*/
-    console.log('click: ' + e.target.value)
+  const handleInputClick = (e) => {        
+    let categories = ["Accesorios", "Remeras", "Pantalones", "Zapatillas"];
+    const str = (e.target.value).toLowerCase();
+    const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+    if (categories.includes(str2)) {
+      navigate(`./categoria/${str2}`);    
+    }
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       let categories = ["Accesorios", "Remeras", "Pantalones", "Zapatillas"];
-      if (categories.includes(e.target.value)) {
-        navigate(`./categoria/${e.target.value}`);
-        console.log(' entro por default presiono enter: ' + e.target.value)
+      const str = (e.target.value).toLowerCase();
+      const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+      if (categories.includes(str2)) {
+        navigate(`./categoria/${str2}`);
+      
       }
     }
   }

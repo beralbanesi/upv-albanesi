@@ -35,3 +35,19 @@ div > button{
   width: 160px;
 }
 
+.circular-progress{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.faq{
+  margin-top:10%;
+}
+.error-page{
+  margin-top:10%;
+}
+.contact{
+  margin-top: 10%;
+}

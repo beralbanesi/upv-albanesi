@@ -11,7 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 
 export default function CartWidget() {
-    const { cartProducts, removeProductFromCart } = useContext(CartContext);
+    const { cartProducts, removeProductFromCart , amount} = useContext(CartContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -23,30 +23,26 @@ export default function CartWidget() {
     };
 
     const handleDeleteClick = (idProduct) => {
-        console.log('entro x delete ');
+       
         removeProductFromCart(idProduct);
     };
 
-    console.log("cartProducts: ", cartProducts)
-
-    // cantidad total de productos
-    let totalCount = cartProducts.reduce((total, prod) => total + prod.count, 0);
-
+   
     return (
         <div className="cartWidget-container">
             <div className="cartIcon-container">
-                {/* <IconButton className='custom-icon-cart' aria-label="agregar al carrito" > */}
-                <ShoppingCartIcon
+              
+            {amount()>0&&<ShoppingCartIcon
                     onClick={handleClick}
                     size="small"
                     sx={{ ml: 2 }}
                     aria-controls={open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
-                />
-               <p className='subidc' > {totalCount} </p> 
+                />}
+               {cartProducts.length>0?<p className='subidc' > {amount()} </p>: <p className='subidc' > </p>}
             </div>
-            {/* </IconButton> */}
+           
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
@@ -57,7 +53,8 @@ export default function CartWidget() {
                 PaperProps={{
                     elevation: 0,
                     sx: {
-                        overflow: 'visible',
+                        overflowY: 'auto',
+                        colorScheme: 'dark',
                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         mt: 1.5,
                         '& .MuiAvatar-root': {
@@ -83,7 +80,8 @@ export default function CartWidget() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                {(cartProducts.length > 0) ? <p className='item-cart-modal-title'> Carrito de Compras</p> : <p className='item-cart-modal-title'>El Carrito esta Vacio</p>}
+                {(cartProducts.length > 0) ? <p className='item-cart-modal-title'> 
+                Carrito de Compras</p> : <p className='item-cart-modal-title'>El Carrito esta Vacio</p>}
                 <Divider />
                 {cartProducts?.map((cartProduct) => {
                     return (

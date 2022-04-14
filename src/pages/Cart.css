@@ -1,0 +1,37 @@
+.item-cart-modal__img {
+    border-radius: 5px;
+    height: 100px;
+}
+
+.item-cart-modal__info {
+    width: 60%;
+    height: 100px;
+    padding-left: 10px;
+    padding-right: 10px;      
+    
+ }
+
+ .item-cart-modal__action {
+    width: 10%;
+}
+
+th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignRight.MuiTableCell-sizeMedium.css-1nslmh4-MuiTableCell-root {
+  border: none;
+}
+
+.continue-btn {
+  background-color: #1F4374;
+  color: white;
+  margin-top: 5px;
+  margin-left: 5%;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 40px;
+  width: 160px;
+}
+
+div > button.continue-btn a{
+  color:white;
+  text-decoration: none;
+}
+  

@@ -8,6 +8,7 @@ import ErrorPage from './pages/Error';
 import FaqPage from './pages/FAQ';
 import AboutUsPage from './pages/AboutUs';
 import CartPage from './pages/Cart';
+import PayPage from './pages/Pay';
 import {CartProvider } from './context/CartContext';
 
 
@@ -27,7 +28,7 @@ function App() {
           <Route path='/cart' element={<CartPage/>}></Route>
           <Route path='/faq' element={<FaqPage/>}></Route>
           <Route path='/brand' element={<HomePage/>}></Route>
-          <Route path='/pay' element={<p>Pagina de pago</p>}></Route>
+          <Route path='/pay' element={<PayPage/>}></Route>
           <Route path='*' element={<ErrorPage/>}></Route>
         </Routes>        
     </BrowserRouter>

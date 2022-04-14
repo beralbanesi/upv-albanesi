@@ -40,7 +40,7 @@ const ItemDetail = () => {
 
   // al actualizar el carrito
   useEffect(() => {
-    console.log('La cantidad de productos en el carrito es: ' + cartValue);
+   
   }, [cartValue])
 
   const onAdd = (qty) => {
@@ -77,7 +77,7 @@ const ItemDetail = () => {
               <li><span className="selected-card-item-description">Colores disponibles:
                 <ul className='color-info'>
                   {selectedProduct.colors?.map((color, i) => {
-                    return <li key={color.id} style={{ background: `${color.hex}`, listStyle: `none` }}><a href="#" >&nbsp;</a></li>
+                    return <li key={color.id} style={{ background: `${color.hex}`, listStyle: `none` }}><a href="#" ></a></li>
                   })
                   }
                 </ul>
@@ -88,7 +88,7 @@ const ItemDetail = () => {
           
             <div>           
               {(cartValue == 0) ? <ItemCount stock={selectedProduct.stock} initialValue={1} onAdd={onAdd} />
-                : <div className='finish-container'><button className="finish-btn" onClick={() => { navigate(`/cart`) }} >Finalizar compra</button></div>
+                : <div className='finish-container'><button className="finish-btn" onClick={() => { navigate(`/cart`) }} >Finalizar compra</button><button className="finish-btn" onClick={() => { navigate(`/`) }} >Seguir comprando</button></div>
 
               }
             </div>

@@ -6,41 +6,62 @@ const CartContext = createContext([])
 // proveedor
 const CartProvider = ({ children }) => {
     const [cartProducts, setCartProducts] = useState([])
-    //useState([{count:0, product:''}]) // [{count: cantidad, producto: registro del mock}]
+
 
     // Devuelve true si el producto que se quiere agregar ya esta en el cart
-    const isInCart = (product) => {
-        let exist = cartProducts.find(cartProduct => cartProduct.product.id == product.id)
-
-        return exist
+    const isInCart = (id) => {
+        return cartProducts.some(prod => prod.product.id == id)
     }
     // agrega producto al carrito, si y solo si no esta en el cart
     const addProductToCart = (product, qty) => {
-        let value = { count: qty, product: product }
 
-        if (isInCart(product))
-            alert('Ya agregaste este producto. Si quieres modificar la cantidad, entra al carrito.')
+
+        let value = { count: qty, product: product }
+        //console.log('id:' + product.id + 'fcion:' + isInCart(product.id));
+        if (isInCart(product.id)) {
+
+            let obj = cartProducts.find((item) => item.product.id == product.id);
+            //console.log('antes obj:' + obj.product.id + 'coiunt' + obj.count);
+            obj.count += qty;
+            //console.log('despues obj:' + obj.product.id + 'coiunt' + obj.count);
+            let newArray = cartProducts.filter((item) => item.product.id !== product.id);
+            // console.log('newarray' + newArray.length)
+            setCartProducts(newArray);
+
+            //console.log('.....' + cartProducts[1].product.id);
+            setCartProducts(cartProducts => [...cartProducts, obj]);
+            //console.log('FIN.....' + cartProducts.length);
+
+        }
         else {
             setCartProducts(cartProducts => [...cartProducts, value]);
-            alert('El producto fue agregado al carrito');
         }
 
     }
     // Elimina los productos cuyo id sean igual a el que viene como parametro
     const removeProductFromCart = (idProduct) => {
         setCartProducts(cartProducts.filter((prod) => { return prod.product.id !== idProduct }))
-        console.log('luego del remove: ' + cartProducts)
     }
     // Remueve todos los items
     const clear = () => {
-        setCartProducts([])
+        const prods = []
+        setCartProducts(prods)
     }
-
+    // calcula la cant total de productos
+    const amount = () => {
+        return cartProducts.reduce((total, prod) => total + prod.count, 0);
+    }
+    // calcula el precio total
+    const totalPrice = () => {
+        return cartProducts.reduce((total, prod) => total + (prod.product.price * prod.count), 0)
+    }
     const data = {
         cartProducts,
         removeProductFromCart,
         addProductToCart,
-        clear
+        clear,
+        amount,
+        totalPrice
     }
 
     return (
