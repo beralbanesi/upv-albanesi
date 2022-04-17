@@ -133,8 +133,14 @@ ul.color-info li {
   margin-bottom: 15px;
 }
 .selected-card-item-description {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: large;
   font-weight: 400;
+  line-height: 35px;
+  text-align: justify;
 }
 
 .selected-card-item-ul {
@@ -164,7 +170,6 @@ ul.color-info li {
   height: 40px;
 }
 
-
 .finish-container {
   width: inherit;
   margin-top: 10%;
@@ -172,13 +177,13 @@ ul.color-info li {
 
 }
 
-.select-sizes{
+select.select-sizes{
   margin-left: 5px;
   width: auto;
   border-radius: 5px;
-  
-  
+  font-size: 16px;
 }
+
 .container-cards{
   margin-top: 10%;
 }

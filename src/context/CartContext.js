@@ -5,7 +5,7 @@ const CartContext = createContext([])
 
 // proveedor
 const CartProvider = ({ children }) => {
-    const [cartProducts, setCartProducts] = useState([])
+    const [cartProducts, setCartProducts] = useState([])    
 
 
     // Devuelve true si el producto que se quiere agregar ya esta en el cart

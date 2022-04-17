@@ -73,7 +73,13 @@ header.main-header.light-mode .cartWidget-container * {
     padding: 5px 20px !important;
     font-family: 'Montserrat' !important;
     width: 100% !important;
+    box-shadow: '1px 1px 5px'; 
 }
+  
+ .btn-custom:hover{
+    background: #107BD4 !important;
+    transform: scale(1.03);
+  }
 
 .btn-custom a {
     color: white !important;

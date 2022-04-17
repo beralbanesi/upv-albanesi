@@ -47,7 +47,7 @@ const Search = ({handleInputClick, handleKeyPress}) => {
     }));
   
     return (
-        <Search className="custom-Search-Bar">
+        <Search >
             <SearchIconWrapper className='search-icon'>
                 <SearchIcon />
             </SearchIconWrapper>

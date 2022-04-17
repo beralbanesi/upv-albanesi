@@ -4,7 +4,8 @@ ul.navbar{
 }
     
 ul.navbar > li > button {
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     background: rgb(30, 30, 30);
     border: white;
     border-style: solid;
@@ -13,6 +14,11 @@ ul.navbar > li > button {
 
 .container-logo{
     width: 10%;
+    transition: all 0.2s ease;
+}
+
+.container-logo:hover{
+    transform: scale(1.03);
 }
 
 .img-header{
@@ -57,14 +63,6 @@ color: primary;
 }
  /**** SEARCH BAR ****/
 
- /*Componente SearchBar*/
-.custom-Search-Bar{
-    border-radius: 5px;
-    align-self: center;
-    color: orangered;
-    background-color: whitesmoke;  
-
-}
 /* color input de la barra de busqueda */
 ul.navbar > li > div > .custom-input{
     border-radius: 5px;
@@ -95,8 +93,10 @@ text-decoration: none;
 /*Para  el menu de la navbar*/
 ul.navbar > li > button { 
     text-decoration: none;
-        color: white;
-    }
+    color: white;
+    min-width: 110px;
+}
+
 ul.navbar > li > button > a { 
     text-decoration: none;
     color: white;

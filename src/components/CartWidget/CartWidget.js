@@ -11,7 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 
 export default function CartWidget() {
-    const { cartProducts, removeProductFromCart , amount} = useContext(CartContext);
+    const { cartProducts, removeProductFromCart, amount } = useContext(CartContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -23,26 +23,29 @@ export default function CartWidget() {
     };
 
     const handleDeleteClick = (idProduct) => {
-       
+
         removeProductFromCart(idProduct);
     };
 
-   
+
     return (
         <div className="cartWidget-container">
             <div className="cartIcon-container">
-              
-            {amount()>0&&<ShoppingCartIcon
+
+                {amount() > 0 && <ShoppingCartIcon
                     onClick={handleClick}
                     size="small"
-                    sx={{ ml: 2 }}
+                    sx={[
+                        { marginLeft:2, marginBottom: 2, cursor: 'pointer', width: '40px', height: '40px', transition: 'all 0.2s ease' },
+                        { '&:hover': { transform: 'scale(1.09)' } }
+                    ]}
                     aria-controls={open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 />}
-               {cartProducts.length>0?<p className='subidc' > {amount()} </p>: <p className='subidc' > </p>}
+                {cartProducts.length > 0 ? <p className='subidc' > {amount()} </p> : <p className='subidc' > </p>}
             </div>
-           
+
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
@@ -80,21 +83,26 @@ export default function CartWidget() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                {(cartProducts.length > 0) ? <p className='item-cart-modal-title'> 
-                Carrito de Compras</p> : <p className='item-cart-modal-title'>El Carrito esta Vacio</p>}
+                {(cartProducts.length > 0) ? <p className='item-cart-modal-title'>
+                    Carrito de Compras</p> : <p className='item-cart-modal-title'>El Carrito esta Vacio</p>}
                 <Divider />
                 {cartProducts?.map((cartProduct) => {
                     return (
                         <MenuItem className='item-cart-modal' key={cartProduct.product.id}>
                             <div className='item-cart-modal__img'>
-                                <img className='item-cart-modal__img' alt='Imagen de producto' src={`./${cartProduct.product.image}`} /> 
+                                <img className='item-cart-modal__img' alt='Imagen de producto' src={`../img/${cartProduct.product.image}`} />
                             </div>
                             <div className='item-cart-modal__info'>
-                                <p>{cartProduct.product.title} ({cartProduct.count} un.) </p>                               
+                                <p>{cartProduct.product.title} ({cartProduct.count} un.) </p>
                                 <span>$ {cartProduct.product.price}</span>
                             </div>
                             <div className='item-cart-modal__action'>
-                                <DeleteIcon onClick={() => { handleDeleteClick(cartProduct.product.id) }} />
+                                <DeleteIcon
+                                    sx={[
+                                        { cursor: 'pointer', width: '25px', height: '25px', borderRadius: '50%', boxShadow: '1px 1px 5px', transition: 'all 0.2s ease' },
+                                        { '&:hover': { transform: 'scale(1.09)' } }
+                                    ]}
+                                    onClick={() => { handleDeleteClick(cartProduct.product.id) }} />
                             </div>
                         </MenuItem>
                     )

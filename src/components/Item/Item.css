@@ -4,12 +4,24 @@
     border: 1px solid #ababab;
     margin-top: 2%;
     margin-left: 2%;
-    box-shadow: 1px 1px 5px #0000002b;
+    box-shadow: 1px 1px 10px #0000002b;
     border-radius: 5px;
     padding: 5px;
     text-align: center;
     width: 18%;
-    background-color: rgb(210, 225, 240);
+    background-color: rgb(217, 225, 241);
+    transition: all 0.3s ease;
+  }
+
+  .card-item:hover{
+    transform: scale(1.02);
+    position: relative;
+    z-index: -1;
+  }
+
+  .card-item:not(:hover){
+    position: relative;
+    z-index: -1;
   }
 
 .card-item-title{
@@ -45,6 +57,12 @@
     margin-left: 5%;
     margin-right: 5%;
     border-radius: 3px;
-    background-color: #000000d7;
+    background-color: #202020;
     color: white;
+  }
+
+  .detail-btn:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+    background-color: #107BD4; 
   }

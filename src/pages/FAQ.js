@@ -3,11 +3,13 @@ const FaqPage = () => {
         <div >
         <h1 className="faq">Preguntas Frecuentes</h1>
          <h2>¿Como vender?</h2>
-         <p>Registrate, publica lo que quieras vender y listo!</p>
+         <p>Registrate, completando los datos requeridos.</p>
+         <p>Agrega los productos que quieras vender.</p>
+         <p>Listo!</p>
          <h2>¿Como comprar?</h2>
-         <p>Registrate, agrega los productos al carrito y presiona "Finalizar compra"</p>
-         <p>El vendedor te contactará para acordar la entrega del producto</p>
-        
+         <p>Registrate, agrega los productos que quieras, andá al carrito y presiona "Iniciar compra"</p>
+         <p>Revisá la lista de productos y presiona "Completar compra"</p>
+         <p>Listo!</p>
         </div>
     )
     

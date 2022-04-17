@@ -18,7 +18,8 @@
   }
   
 .elementAU {
-    text-align: left;
+    text-align: justify;
+    line-height: 30px;
     width: fit-content;
     background-color: whitesmoke;
     color: black;

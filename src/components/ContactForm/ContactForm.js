@@ -65,10 +65,10 @@ const ContactForm = () => {
                 <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí." required ></textarea>
             </div>
             <div  className="elem-group">
-                <button className="form-btn" type="submit" >Enviar</button>
+                <button className="contact-btn" type="submit" >ENVIAR</button>
             </div>
             <div  className="elem-group">
-                <button className="form-btn" type="reset" >Limpiar</button>
+                <button className="contact-btn" type="reset" >LIMPIAR</button>
             </div>
         </div>
         </form>

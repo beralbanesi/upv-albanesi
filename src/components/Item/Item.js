@@ -18,7 +18,7 @@ export default function Item({productData})
       
        
         <div className="card-item">
-            <img className="card-item-img" alt='Imagen de producto' src={image}/>
+            <img className="card-item-img" alt='Imagen de producto' src={`../img/${image}`}/>
             <div className="card-item-title">{title}</div>
             <div className="card-item-price">Precio: ${price}</div>
             <Link to={`/productos/${id}`} className="detail-btn" >VER DETALLE</Link>

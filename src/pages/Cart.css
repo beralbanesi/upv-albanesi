@@ -35,3 +35,17 @@ div > button.continue-btn a{
   text-decoration: none;
 }
   
+.orderForm {
+  display: flexbox;
+  width: 100%;
+  height: 100%;
+
+}
+
+div > form > div > button.pay-btn{
+  box-shadow: '1px 1px 5px';
+ text-transform: uppercase;
+ /* margin: 1, textTransform: 'uppercase', width: '15%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
+  { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } } */
+}
+

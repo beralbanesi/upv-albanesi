@@ -8,7 +8,12 @@ const FaqPage = () => {
                     <img className="logo-imgAU" alt='Sobre nosotros...' src="./img/logo512.png"/>
                 </div>
                 <div className="elementAU">
-                    <p> <b>Usalo-Publicalo-Vendelo</b> nació en el año 2020 durante la pandemia COVID-19 ante la necesidad de ...</p>
+                    <p> <b>Usalo-Publicalo-Vendelo</b> nació en el año 2020 durante la pandemia COVID-19 ante 
+                    la imposibilidad de la gente de salir de sus hogares y la necesidad de vender pertenencias 
+                    que ya no estaban utilizando. 
+                    Por medio de <b>Usalo-Publicalo-Vendelo</b> se han realizado
+                    mas de 530.000 ventas de artículos usados. La plataforma cuenta en estos momentos con mas 
+                    de 200.000 usuarios registrados.</p>
                 </div>
             </div>
         </div>   
