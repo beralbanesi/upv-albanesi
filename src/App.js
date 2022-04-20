@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ContactPage from './pages/Contact';
 import HomePage from './pages/Home';
 import DetailPage from './pages/Detail';
@@ -9,32 +9,34 @@ import FaqPage from './pages/FAQ';
 import AboutUsPage from './pages/AboutUs';
 import CartPage from './pages/Cart';
 import PayPage from './pages/Pay';
-import {CartProvider } from './context/CartContext';
+import { CartProvider } from './context/CartContext';
+import Footer from './pages/Footer';
 
 
-function App() {  
+function App() {
 
   return (
     <div className="App">
-       <CartProvider>
-        <BrowserRouter>      
-        <NavBar />        
-        <Routes>
-          <Route path='/' element={ <HomePage/>}></Route>
-          <Route path='/contacto' element={<ContactPage/>}></Route>
-          <Route path='/categoria/:category/' element={<HomePage/>}></Route>
-          <Route path='/productos/:id' element={<DetailPage/>}></Route>
-          <Route path='/nosotros' element={<AboutUsPage/>}></Route>
-          <Route path='/cart' element={<CartPage/>}></Route>
-          <Route path='/faq' element={<FaqPage/>}></Route>
-          <Route path='/brand' element={<HomePage/>}></Route>
-          <Route path='/pay' element={<PayPage/>}></Route>
-          <Route path='*' element={<ErrorPage/>}></Route>
-        </Routes>        
-    </BrowserRouter>
-    </CartProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<HomePage />}></Route>
+            <Route path='/contacto' element={<ContactPage />}></Route>
+            <Route path='/categoria/:category/' element={<HomePage />}></Route>
+            <Route path='/productos/:id' element={<DetailPage />}></Route>
+            <Route path='/nosotros' element={<AboutUsPage />}></Route>
+            <Route path='/cart' element={<CartPage />}></Route>
+            <Route path='/faq' element={<FaqPage />}></Route>
+            <Route path='/brand' element={<HomePage />}></Route>
+            <Route path='/pay' element={<PayPage />}></Route>
+            <Route path='*' element={<ErrorPage />}></Route>
+          </Routes>
+          <Footer/>
+        </BrowserRouter>
+      </CartProvider>
     </div>
- 
+
   );
 }
 

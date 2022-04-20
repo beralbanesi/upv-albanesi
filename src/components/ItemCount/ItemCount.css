@@ -42,3 +42,7 @@
     transform: scale(1.03);
     background-color: #107BD4; 
   }
+
+  .noStock {
+    color: red
+  }

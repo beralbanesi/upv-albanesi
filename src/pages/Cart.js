@@ -1,3 +1,4 @@
+import './Cart.css'
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import CartContext from "../context/CartContext";
@@ -13,7 +14,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { Divider } from "@mui/material";
 import db from "../Utils/firebase-config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 //
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -25,7 +26,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 const CartPage = () => {
 
-    const { cartProducts, removeProductFromCart, clear, totalPrice } = useContext(CartContext);
+    const { cartProducts, removeProductFromCart, clear, totalPrice, updateCartContextStock } = useContext(CartContext);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -35,18 +36,23 @@ const CartPage = () => {
         let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
         return formatted_date;
     }
-    let aDate = Math.floor(Date.now() / 1000);
+
+    let aDate = formatDate(new Date())
+   
+    
     const [openModal, setOpenModal] = useState(false)
+    const [openSuccessModal, setOpenSuccessModal] = useState(false)
+
     const [order, setOrder] = useState({
         buyer: { name: '', phone: '', email: '' },
         items: cartProducts.map((p) => { return { id: p.product.id, title: p.product.title, price: p.product.price, count: p.count } }),
         date: aDate,
         total: totalPrice()
     })
-  // ber
-  const handleClose = () => {
-    setOpenModal(false);
-  };
+
+    const handleClose = () => {
+        setOpenModal(false);
+    };
 
     //console.log('fecha' + aDate)
     const [successOrder, setSuccessOrder] = useState()
@@ -61,21 +67,37 @@ const CartPage = () => {
     }
 
     const handleCheckOut = (e) => {
-        //console.log('checkout:', formData)
         e.preventDefault()
         order.buyer = formData;
-        setOrder({ ...order})
+        setOrder({ ...order })
         setOpenModal(false)
         pushOrder()
-        clear()
     }
 
     const pushOrder = async () => {
         const ordersFirebase = collection(db, 'ordenes')
         const orderDoc = await addDoc(ordersFirebase, order)
-        console.log('orden generada' + orderDoc.id)
         setSuccessOrder(orderDoc.id)
+        updateDBStock()
+        setOpenSuccessModal(true) // dialog de exito
     }
+    const updateDBStock = () => {
+        const result = order.items.map((item) => {
+            updateProduct(item)
+        })
+    }
+
+    // actualizar stock de 1 producto de la BD
+    const updateProduct = async (myOrder) => {
+        const docRef = doc(db, 'productos', myOrder.id)
+        const docSnap = await getDoc(docRef)
+        if (docSnap.exists()) {
+            const newStock = docSnap.data().stock - myOrder.count
+            updateDoc(docRef, {
+                stock: newStock
+            }).then(() => { })
+        }
+    };
 
     const handleChange = (e) => {
         //console.log('change' + e.target.name)
@@ -90,24 +112,37 @@ const CartPage = () => {
     //table
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
+            backgroundColor: theme.palette.common.white,
+            color: theme.palette.common.black,
             border: 'none'
         },
         [`&.${tableCellClasses.body}`]: {
             fontSize: 16,
+            color: theme.palette.common.black,
         },
     }));
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-            backgroundColor: 'white',//theme.palette.action.hover,
+            backgroundColor: theme.palette.common.white,//theme.palette.action.hover,
         },
         // hide last border
         '&:last-child td, &:last-child th': {
             border: 0
         },
     }));
+    // dialog de exito de operacion
+    const handleSuccessAccept = () => {
+        setOpenSuccessModal(false);
+        updateCartContextStock(order)
+        clear();
+        navigate(`/`);
+    }
+
+    const handleSuccessClose = () => {
+        setOpenSuccessModal(false);
+    };
+
 
     return (
         <div>
@@ -125,7 +160,8 @@ const CartPage = () => {
                                 <StyledTableCell align="right"> {cartProduct.product.title}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">Precio unit.: ${cartProduct.product.price}</StyledTableCell>
-                                <StyledTableCell align="right">Cantidad: {cartProduct.count}</StyledTableCell>
+                                <StyledTableCell align="right">Cantidad: {cartProduct.count} (un.)
+                                </StyledTableCell>
                                 <StyledTableCell align="right"> Subtotal: ${(cartProduct.count * cartProduct.product.price).toFixed(2)}</StyledTableCell>
                                 <StyledTableCell align="right">  <DeleteIcon
                                     sx={[
@@ -140,14 +176,15 @@ const CartPage = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Divider />
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 300 }} aria-label="customized table">
+                <Table sx={{ minWidth: 300, minHeight: 300 }} aria-label="customized table">
                     <TableHead className="table-cart">
                         <TableRow>
                             {totalPrice() !== 0 ? <StyledTableCell sx={{ fontSize: 24, fontWeight: 'bold' }} align="right" >Total: ${totalPrice().toFixed(2)}</StyledTableCell>
                                 : <StyledTableCell sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 100, fontSize: 24, fontWeight: 'bold' }} align="right">El carrito esta vacio</StyledTableCell>}
                         </TableRow>
-                        <TableRow>
+                        <TableRow sx={{ backgroundColor: 'white' }}>
                             <StyledTableCell align="right">
                                 {(cartProducts.length > 0) ?
                                     <div>
@@ -187,13 +224,17 @@ const CartPage = () => {
             </TableContainer>
             <Divider />
             {successOrder ?
-                <>
-                    <h1>Felicitaciones, se generó su orden exitosamente.</h1>
-                    <button onClick={() => { navigate(`/`) }}>Aceptar</button>
-                </>
+
+                <Dialog open={openSuccessModal} onClose={handleSuccessClose}>
+                    <DialogTitle >¡Felicitaciones! Tu orden se genero correctamente.</DialogTitle>
+                    <DialogContent sx={{ fontWeight: 600 }}>Nro de orden: <span className='orderNumber'>{successOrder}</span></DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleSuccessAccept}>ACEPTAR</Button>
+                    </DialogActions>
+                </Dialog>
 
                 : (
-                    <div className="modal">                     
+                    <div className="modal">
                         <Dialog open={openModal} onClose={handleClose}>
                             <DialogTitle>Completar compra</DialogTitle>
                             <DialogContent>
@@ -212,7 +253,7 @@ const CartPage = () => {
                                     required
                                     onChange={(e) => { handleChange(e) }}
                                 />
-                                   <TextField
+                                <TextField
                                     autoFocus
                                     margin="dense"
                                     id="phone"

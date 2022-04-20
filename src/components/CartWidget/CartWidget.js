@@ -10,10 +10,13 @@ import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 
+
 export default function CartWidget() {
-    const { cartProducts, removeProductFromCart, amount } = useContext(CartContext);
+    const { cartProducts, removeProductFromCart, amount} = useContext(CartContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -27,7 +30,7 @@ export default function CartWidget() {
         removeProductFromCart(idProduct);
     };
 
-
+  
     return (
         <div className="cartWidget-container">
             <div className="cartIcon-container">
@@ -36,7 +39,7 @@ export default function CartWidget() {
                     onClick={handleClick}
                     size="small"
                     sx={[
-                        { marginLeft:2, marginBottom: 2, cursor: 'pointer', width: '40px', height: '40px', transition: 'all 0.2s ease' },
+                        { marginLeft: 2, marginBottom: 2, cursor: 'pointer', width: '40px', height: '40px', transition: 'all 0.2s ease' },
                         { '&:hover': { transform: 'scale(1.09)' } }
                     ]}
                     aria-controls={open ? 'account-menu' : undefined}
@@ -86,14 +89,14 @@ export default function CartWidget() {
                 {(cartProducts.length > 0) ? <p className='item-cart-modal-title'>
                     Carrito de Compras</p> : <p className='item-cart-modal-title'>El Carrito esta Vacio</p>}
                 <Divider />
-                {cartProducts?.map((cartProduct) => {
+                {cartProducts?.map((cartProduct,i) => {
                     return (
                         <MenuItem className='item-cart-modal' key={cartProduct.product.id}>
                             <div className='item-cart-modal__img'>
                                 <img className='item-cart-modal__img' alt='Imagen de producto' src={`../img/${cartProduct.product.image}`} />
                             </div>
                             <div className='item-cart-modal__info'>
-                                <p>{cartProduct.product.title} ({cartProduct.count} un.) </p>
+                                <p>{cartProduct.product.title} ({cartProduct.count} un.) </p>                              
                                 <span>$ {cartProduct.product.price}</span>
                             </div>
                             <div className='item-cart-modal__action'>
@@ -112,7 +115,7 @@ export default function CartWidget() {
                 <div className='footer-modal-cart'>
                     {cartProducts.length > 0 && <Button className="btn-custom"><Link to="/cart">Iniciar la compra</Link></Button>
                     }
-                </div>
+                </div>               
             </Menu>
         </div>
     );

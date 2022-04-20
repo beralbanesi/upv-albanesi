@@ -1,6 +1,8 @@
 .item-cart-modal__img {
+    border: 1px solid #ababab;
     border-radius: 5px;
     height: 100px;
+    box-shadow: '1px 1px 5px'; 
 }
 
 .item-cart-modal__info {
@@ -8,7 +10,6 @@
     height: 100px;
     padding-left: 10px;
     padding-right: 10px;      
-    
  }
 
  .item-cart-modal__action {
@@ -40,6 +41,10 @@ div > button.continue-btn a{
   width: 100%;
   height: 100%;
 
+}
+
+.orderNumber{
+  color: green;
 }
 
 div > form > div > button.pay-btn{

@@ -110,3 +110,8 @@ ul.navbar > li > button > svg{
     align-items: center;
     margin-top: -1vh;
 }
+
+.add-btn{
+    width: 25px;
+    justify-content: center;
+}

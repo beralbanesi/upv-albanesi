@@ -11,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -26,7 +27,7 @@ const ItemDetail = () => {
   // estados
   const [selectedProduct, setSelectedProduct] = useState({})
 
-  const [cartValue, setCartValue] = useState(0) // useState([])  //[{ idProducto: 0, count: 0} ]
+  const [cartValue, setCartValue] = useState(0) 
 
   // consumir el contexto
   const { addProductToCart } = useContext(CartContext);
@@ -41,7 +42,7 @@ const ItemDetail = () => {
 
   //firebase
   const getProduct = async () => {
-    // console.log("id: ", id)
+   
     const docRef = doc(db, 'productos', id)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
@@ -54,18 +55,13 @@ const ItemDetail = () => {
     }
   }
 
-
-
   // en montaje
   useEffect(() => {
     getProduct()  // con firebase
   }, [])
 
-
-
   // al actualizar el carrito
   useEffect(() => {
-
   }, [cartValue])
 
 
@@ -76,7 +72,7 @@ const ItemDetail = () => {
   }
 
   return (
-
+    
     <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
@@ -92,24 +88,25 @@ const ItemDetail = () => {
             <div className="selected-card-item-title">{selectedProduct.title}</div>
             <div className="selected-card-item-description">{selectedProduct.description}</div>
             <div className="selected-card-item-description"><span>Talles disponibles:
-              <select className='select-sizes'>
-                {selectedProduct.sizes?.map((size, i) => {
-                  return <option key={i} value={size}>{size} </option>
-                })
-                }
-              </select>
+              {selectedProduct.sizes?.map((size, i) => {
+                let s = `[${size}]`
+                return s
+              })
+              }
             </span>
             </div>
             <div className="selected-card-item-description">
               <span >Colores disponibles:</span>
-              {selectedProduct.colors?.map((color, i) => {
-                return <button key={i} style={{ marginLeft: '10px', verticalAlign: 'top', background: `${color}`, borderRadius: '50%', width: '25px', height: '25px' }}><a href="#" ></a></button>
-              })
-              }
-
+              <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                {selectedProduct.colors?.map((color, i) => {
+                  return <Fab key={i} size="small" sx={{ background: `${color}`, cursor:'default', 
+                  '&:hover': {background: `${color}`} }} aria-label="add" ></Fab>
+                })
+                }
+              </Box>
             </div>
             <div className="selected-card-item-description"><span >Puntuación:</span> {starItems} </div>
-            <div className="selected-card-item-description"><span>Stock disponible: {selectedProduct.stock}</span></div>
+            <div className="selected-card-item-description"><span>Stock disponible: {(selectedProduct.stock > 0) ? selectedProduct.stock : <span>-</span>}</span></div>
             <div>
               {(cartValue == 0) ? <ItemCount stock={selectedProduct.stock} initialValue={1} onAdd={onAdd} />
                 : <div className='finish-container'>

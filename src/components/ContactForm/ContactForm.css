@@ -1,6 +1,7 @@
 .main-container {
     width: fit-content;
     margin-left: 15%;
+    margin-top: 15%;
 }
 
 .wrapper {
@@ -58,7 +59,7 @@ select {
     border-radius: 5px;
     height: 40px;
 }
- 
+
 .contact-btn:hover{
     cursor: pointer;
     transform: scale(1.03);
