@@ -1,7 +1,6 @@
 import './CartWidget.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
-import '../NavBar/NavBar.css';
 import { useState, useContext } from 'react';
 import CartContext from '../../context/CartContext';
 import Menu from '@mui/material/Menu';
@@ -10,14 +9,11 @@ import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 
-
 export default function CartWidget() {
-    const { cartProducts, removeProductFromCart, amount} = useContext(CartContext);
+    const { cartProducts, removeProductFromCart, amount, totalPrice} = useContext(CartContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     
-
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -26,15 +22,12 @@ export default function CartWidget() {
     };
 
     const handleDeleteClick = (idProduct) => {
-
         removeProductFromCart(idProduct);
     };
 
-  
     return (
-        <div className="cartWidget-container">
-            <div className="cartIcon-container">
-
+        <div className="cart-widget-container">
+            <div className="cart-icon-container">
                 {amount() > 0 && <ShoppingCartIcon
                     onClick={handleClick}
                     size="small"
@@ -88,18 +81,18 @@ export default function CartWidget() {
             >
                 {(cartProducts.length > 0) ? <p className='item-cart-modal-title'>
                     Carrito de Compras</p> : <p className='item-cart-modal-title'>El Carrito esta Vacio</p>}
-                <Divider />
+                <Divider sx={{background:'#555555'}}/>
                 {cartProducts?.map((cartProduct,i) => {
                     return (
                         <MenuItem className='item-cart-modal' key={cartProduct.product.id}>
-                            <div className='item-cart-modal__img'>
-                                <img className='item-cart-modal__img' alt='Imagen de producto' src={`../img/${cartProduct.product.image}`} />
+                            <div>
+                                <img className='item-cart-modal-img' alt='Imagen de producto' src={`../img/${cartProduct.product.image}`} />
                             </div>
-                            <div className='item-cart-modal__info'>
+                            <div className='item-cart-modal-info'>
                                 <p>{cartProduct.product.title} ({cartProduct.count} un.) </p>                              
                                 <span>$ {cartProduct.product.price}</span>
                             </div>
-                            <div className='item-cart-modal__action'>
+                            <div className='item-cart-modal-delete'>
                                 <DeleteIcon
                                     sx={[
                                         { cursor: 'pointer', width: '25px', height: '25px', borderRadius: '50%', boxShadow: '1px 1px 5px', transition: 'all 0.2s ease' },
@@ -111,10 +104,10 @@ export default function CartWidget() {
                     )
                 })}
 
-                <Divider />
+                <Divider sx={{background:'#555555'}}/>
+                <div className='cart-widget-total'> Total ({amount()} unidades): ${totalPrice()}</div>
                 <div className='footer-modal-cart'>
-                    {cartProducts.length > 0 && <Button className="btn-custom"><Link to="/cart">Iniciar la compra</Link></Button>
-                    }
+                    {cartProducts.length > 0 && <Link to="/cart"><Button className="proceed-purchase-btn">Iniciar la compra</Button></Link>}
                 </div>               
             </Menu>
         </div>

@@ -1,67 +1,14 @@
-.main-container {
+.main-containerCF {
     width: fit-content;
-    margin-left: 15%;
-    margin-top: 15%;
-}
-
-.wrapper {
-    display: grid;
-    grid-template-columns: 150px 400px;
-    grid-gap: 10px;
-    background-color: #fd733c;
-    color: #6A6A7A;
+    margin-left: 35%;
+    margin-top: 8%;
 }
 
 .elem-group {
     text-align: left;
     width: fit-content;
-    background-color: #fd733c;
     color: #fff;
     border-radius: 5px;
-    padding: 20px;
+    padding: 3px;
     font-size: 100%;
 }
-
-/* .form-btn {
-    background-color: black;
-    color: white;
-    width: 150px;
-} */
-
-input {
-    width: 300px;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-textarea {
-    min-width: 300px;
-    border-radius: 5px;
-    font-size: 16px;
-    
-}
-#form{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-select {
-    width: 308px;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-
-.contact-btn {
-    background-color: #1F4374;
-    color: white;
-    margin-top: 5px;
-    margin-left: 5%;
-    font-size: 12px;
-    border-radius: 5px;
-    height: 40px;
-}
-
-.contact-btn:hover{
-    cursor: pointer;
-    transform: scale(1.03);
-    background-color: #107BD4; 
-  }

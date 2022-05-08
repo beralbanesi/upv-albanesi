@@ -2,7 +2,8 @@ import "./AboutUs.css"
 
 const FaqPage = () => {
     return(
-        <div className="main-containerAU">
+        <div className="main-container">
+            <h1>Sobre nuestro emprendimiento</h1>
             <div className="wrapperAU">
                 <div className="elementAU">
                     <img className="logo-imgAU" alt='Sobre nosotros...' src="./img/logo512.png"/>
@@ -13,7 +14,7 @@ const FaqPage = () => {
                     que ya no estaban utilizando. 
                     Por medio de <b>Usalo-Publicalo-Vendelo</b> se han realizado
                     mas de 530.000 ventas de artículos usados. La plataforma cuenta en estos momentos con mas 
-                    de 200.000 usuarios registrados.</p>
+                    de 70.000 usuarios registrados.</p>
                 </div>
             </div>
         </div>   

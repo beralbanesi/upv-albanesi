@@ -2,6 +2,8 @@ import './Cart.css'
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import CartContext from "../context/CartContext";
+import { useAuth } from '../context/AuthContext';
+import {Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -11,11 +13,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
+import { Button, Box } from '@mui/material';
 import { Divider } from "@mui/material";
 import db from "../Utils/firebase-config";
-import { addDoc, collection, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-//
+import { addDoc, collection, doc, getDoc, updateDoc, query, where, getDocs } from "firebase/firestore";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -26,20 +28,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 const CartPage = () => {
 
-    const { cartProducts, removeProductFromCart, clear, totalPrice, updateCartContextStock } = useContext(CartContext);
+    const { cartProducts, removeProductFromCart, clear, totalPrice, updateCartContextStock, updateCount } = useContext(CartContext);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
         email: '',
     })
-    const formatDate = (current_datetime) => {
+
+    const { user } = useAuth()
+
+    const formatCurrentDate = (current_datetime) => {
         let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
         return formatted_date;
     }
+    let aDate = formatCurrentDate(new Date())
 
-    let aDate = formatDate(new Date())
-   
-    
     const [openModal, setOpenModal] = useState(false)
     const [openSuccessModal, setOpenSuccessModal] = useState(false)
 
@@ -54,7 +57,6 @@ const CartPage = () => {
         setOpenModal(false);
     };
 
-    //console.log('fecha' + aDate)
     const [successOrder, setSuccessOrder] = useState()
     const navigate = useNavigate();
 
@@ -68,7 +70,9 @@ const CartPage = () => {
 
     const handleCheckOut = (e) => {
         e.preventDefault()
-        order.buyer = formData;
+        order.buyer = formData
+        order.items = cartProducts.map((p) => { return { id: p.product.id, title: p.product.title, price: p.product.price, count: p.count } })
+        order.total = totalPrice()
         setOrder({ ...order })
         setOpenModal(false)
         pushOrder()
@@ -81,9 +85,10 @@ const CartPage = () => {
         updateDBStock()
         setOpenSuccessModal(true) // dialog de exito
     }
+
     const updateDBStock = () => {
-        const result = order.items.map((item) => {
-            updateProduct(item)
+        order.items.map((item) => {
+            return updateProduct(item)
         })
     }
 
@@ -100,7 +105,6 @@ const CartPage = () => {
     };
 
     const handleChange = (e) => {
-        //console.log('change' + e.target.name)
         const { value, name } = e.target
 
         setFormData({
@@ -112,12 +116,15 @@ const CartPage = () => {
     //table
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.white,
+            backgroundColor: '#DDDDDD',
             color: theme.palette.common.black,
-            border: 'none'
+            border: 'none',
+            fontSize: 22,
+            fontWeight: 'bold',
+
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: 16,
+            fontSize: 20,
             color: theme.palette.common.black,
         },
     }));
@@ -131,39 +138,104 @@ const CartPage = () => {
             border: 0
         },
     }));
+
     // dialog de exito de operacion
     const handleSuccessAccept = () => {
         setOpenSuccessModal(false);
         updateCartContextStock(order)
-        clear();
-        navigate(`/`);
+        clear()
+        navigate('/')
     }
 
     const handleSuccessClose = () => {
-        setOpenSuccessModal(false);
+        setOpenSuccessModal(false)
     };
 
+    const handleOpenModal = async () => {
+        //firebase
+        const userQuery = query(collection(db, "usuarios"), where("email", "==", user.email));
+        const querySnapshot = await getDocs(userQuery);
+        // si se encontro el usuario en BD
+        if (querySnapshot.docs[0]) {
+            const newFormData =
+            {
+                name: querySnapshot.docs[0].data().name,
+                phone: querySnapshot.docs[0].data().phone,
+                email: querySnapshot.docs[0].data().email
+            }
+            setFormData(newFormData)
+            setOpenModal(true)
+            return
+        }
+        else {
+            setFormData({})
+            setOpenModal(true)
+        }
+    }
+
+    //incrementa count de un producto  q viene como parametro (en cartProducts)
+    const addCount = (prod) => {
+        let newValue = prod.count + 1;
+        (newValue <= prod.product.stock) && (updateCount(prod.product.id, newValue))
+
+    };
+
+    //decrementa count de un producto  q viene como parametro (en cartProducts)
+    const removeCount = (prod) => {
+        let newValue = prod.count - 1;
+        (newValue > 0) && (updateCount(prod.product.id, newValue));
+    };
 
     return (
-        <div>
-            <h1>Carrito de compras:</h1>
+        <div className='main-container'>
+            <h1>Carrito de compras</h1>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
-
+                    <TableHead className="table-cart">
+                        <TableRow>
+                            <StyledTableCell align="center">Producto</StyledTableCell>
+                            <StyledTableCell align="center">Nombre</StyledTableCell>
+                            <StyledTableCell align="center">Precio unit.</StyledTableCell>
+                            <StyledTableCell align="center">Cantidad</StyledTableCell>
+                            <StyledTableCell align="center">Subtotal</StyledTableCell>
+                            <StyledTableCell align="center">Eliminar</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {cartProducts?.map((cartProduct, i) => (
                             <StyledTableRow key={cartProduct.product.title}>
-                                <StyledTableCell component="th" scope="row">
-                                    <img className='item-cart-modal__img' alt='Imagen de producto' src={`../img/${cartProduct.product.image}`} />
-
+                                <StyledTableCell align="center" component="th" scope="row">
+                                    <Link to={`/productos/${cartProduct.product.id}`} >
+                                        <img className='item-img' alt='Imagen de producto' src={`../img/${cartProduct.product.image}`} />
+                                    </Link>
                                 </StyledTableCell>
-                                <StyledTableCell align="right"> {cartProduct.product.title}
+                                <StyledTableCell align="center"> {cartProduct.product.title}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">Precio unit.: ${cartProduct.product.price}</StyledTableCell>
-                                <StyledTableCell align="right">Cantidad: {cartProduct.count} (un.)
+                                <StyledTableCell align="center">${cartProduct.product.price}</StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {/* <button className='itemCount-btn' onClick={() => { removeCount(cartProduct) }} disabled={cartProduct.count <= 0 ? true : null} > - </button>
+                                    {cartProduct.count}
+                                    <button className='itemCount-btn' onClick={() => { addCount(cartProduct) }} disabled={cartProduct.count >= cartProduct.product.stock ? true : null}> + </button> */}
+                                    <Fab size="small" disabled={cartProduct.count >= cartProduct.stock ? true : null}
+                                        sx={{
+                                            fontSize: 'large',
+                                            color: 'white',
+                                            background: '#fd733c', cursor: 'pointer',
+                                            '&:hover': { background: '#107BD4' }
+                                        }} aria-label="add"
+                                        onClick={() => { removeCount(cartProduct) }} > - </Fab>
+                                    <Box component="span" sx={{ padding: '15px', fontWeight: 'bold' }}> {cartProduct.count} </Box>
+                                    <Fab size="small" disabled={cartProduct.count >= cartProduct.stock ? true : null}
+                                        sx={{
+                                            fontSize: 'large',
+                                            color: 'white',
+                                            background: '#fd733c', cursor: 'pointer',
+                                            '&:hover': { background: '#107BD4' }
+                                        }} aria-label="add"
+                                        onClick={() => { addCount(cartProduct) }}> + </Fab>
                                 </StyledTableCell>
-                                <StyledTableCell align="right"> Subtotal: ${(cartProduct.count * cartProduct.product.price).toFixed(2)}</StyledTableCell>
-                                <StyledTableCell align="right">  <DeleteIcon
+                                <StyledTableCell align="center">${(cartProduct.count * cartProduct.product.price).toFixed(2)}</StyledTableCell>
+                                <StyledTableCell align="center">  <DeleteIcon
                                     sx={[
                                         { cursor: 'pointer', width: '30px', height: '30px', borderRadius: '50%', boxShadow: '1px 1px 5px', transition: 'all 0.2s ease' },
                                         { '&:hover': { transform: 'scale(1.09)' } }
@@ -178,13 +250,13 @@ const CartPage = () => {
             </TableContainer>
             <Divider />
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 300, minHeight: 300 }} aria-label="customized table">
+                <Table sx={{ minWidth: 300}} aria-label="customized table">
                     <TableHead className="table-cart">
                         <TableRow>
-                            {totalPrice() !== 0 ? <StyledTableCell sx={{ fontSize: 24, fontWeight: 'bold' }} align="right" >Total: ${totalPrice().toFixed(2)}</StyledTableCell>
+                            {totalPrice() !== 0 ? <StyledTableCell align="right" >Total: ${totalPrice().toFixed(2)}</StyledTableCell>
                                 : <StyledTableCell sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 100, fontSize: 24, fontWeight: 'bold' }} align="right">El carrito esta vacio</StyledTableCell>}
                         </TableRow>
-                        <TableRow sx={{ backgroundColor: 'white' }}>
+                        <TableRow>
                             <StyledTableCell align="right">
                                 {(cartProducts.length > 0) ?
                                     <div>
@@ -199,13 +271,13 @@ const CartPage = () => {
                                                 { boxShadow: '1px 1px 5px', margin: 1, textTransform: 'uppercase', width: '15%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
                                                 { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } }
                                             ]}
-                                            onClick={() => { navigate(`/`) }} >Seguir comprando</Button>
+                                            onClick={() => { navigate('/') }} >Seguir comprando</Button>
                                         <Button
                                             sx={[
                                                 { boxShadow: '1px 1px 5px', margin: 1, textTransform: 'uppercase', width: '15%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
                                                 { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } }
                                             ]}
-                                            onClick={() => setOpenModal(true)} >Completar compra</Button>
+                                            onClick={handleOpenModal} >Completar compra</Button>
                                     </div>
                                     : (cartProducts.length == 0) &&
                                     <div>
@@ -214,7 +286,7 @@ const CartPage = () => {
                                                 { boxShadow: '1px 1px 5px', margin: 1, textTransform: 'uppercase', width: '15%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
                                                 { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } }
                                             ]}
-                                            onClick={() => { navigate(`/`) }} >Seguir comprando</Button>
+                                            onClick={() => { navigate('/') }} >Seguir comprando</Button>
                                     </div>
                                 }
                             </StyledTableCell>
@@ -227,7 +299,7 @@ const CartPage = () => {
 
                 <Dialog open={openSuccessModal} onClose={handleSuccessClose}>
                     <DialogTitle >¡Felicitaciones! Tu orden se genero correctamente.</DialogTitle>
-                    <DialogContent sx={{ fontWeight: 600 }}>Nro de orden: <span className='orderNumber'>{successOrder}</span></DialogContent>
+                    <DialogContent sx={{ fontWeight: 600 }}>Nro de orden: <span className='order-number'>{successOrder}</span></DialogContent>
                     <DialogActions>
                         <Button onClick={handleSuccessAccept}>ACEPTAR</Button>
                     </DialogActions>
@@ -242,10 +314,12 @@ const CartPage = () => {
                                     Complete los campos indicados con (*).
                                 </DialogContentText>
                                 <TextField
+                                    disabled={user && user.email != 'Invitado' ? true : null}
                                     autoFocus
                                     margin="dense"
                                     id="name"
                                     name="name"
+                                    value={formData.name}
                                     label="Nombre y Apellido"
                                     type="name"
                                     fullWidth
@@ -254,10 +328,12 @@ const CartPage = () => {
                                     onChange={(e) => { handleChange(e) }}
                                 />
                                 <TextField
+                                    disabled={user && user.email != 'Invitado' ? true : null}
                                     autoFocus
                                     margin="dense"
                                     id="phone"
                                     name="phone"
+                                    value={formData.phone}
                                     label="Telefono"
                                     type="phone"
                                     fullWidth
@@ -266,10 +342,12 @@ const CartPage = () => {
                                     onChange={(e) => { handleChange(e) }}
                                 />
                                 <TextField
+                                    disabled={user && user.email != 'Invitado' ? true : null}
                                     autoFocus
                                     margin="dense"
                                     id="email"
                                     name="email"
+                                    value={formData.email}
                                     label="Email Address"
                                     type="email"
                                     fullWidth
@@ -279,8 +357,18 @@ const CartPage = () => {
                                 />
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose}>Cancel</Button>
-                                <Button onClick={handleCheckOut}>Proceder pago</Button>
+                                <Button
+                                    sx={[
+                                        { boxShadow: '1px 1px 5px', margin: 1, textTransform: 'uppercase', width: '30%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
+                                        { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } }
+                                    ]}
+                                    onClick={handleClose}>Cancel</Button>
+                                <Button
+                                    sx={[
+                                        { boxShadow: '1px 1px 5px', margin: 1, textTransform: 'uppercase', width: '30%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
+                                        { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } }
+                                    ]}
+                                    onClick={handleCheckOut}>Enviar orden</Button>
                             </DialogActions>
                         </Dialog>
                     </div>

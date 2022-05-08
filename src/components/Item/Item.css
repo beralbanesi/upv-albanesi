@@ -16,13 +16,17 @@
   .card-item:hover{
     transform: scale(1.02);
     position: relative;
-    z-index: -1;
+    /* z-index: -1; */
   }
 
   .card-item:not(:hover){
     position: relative;
-    z-index: -1;
+    /* z-index: -1; */
   }
+  
+.card-item-img{
+  width: 80%;
+}
 
 .card-item-title{
     font-size: large;
@@ -37,15 +41,6 @@
     font-size: medium;
     margin-bottom: 10px;
   }
-
-.card-item-description{
-    font-size: medium;
-    font-weight: 350;
-}
-
-.card-item-img{
-    width: 80%;
-}
   
 .detail-btn{
     text-decoration: none;

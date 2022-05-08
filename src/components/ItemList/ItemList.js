@@ -1,3 +1,4 @@
+import './ItemList.css';
 import Item from "../Item/Item";
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -42,8 +43,7 @@ const ItemList = ({ category = 'listAll' }) => {
       // el texto a buscar NO es una categoria, busco por descripcion
       else {
         products.map((product) => {
-          let desc = product.description.toUpperCase();
-         
+          let desc = product.description.toUpperCase();        
           if (desc.includes(category.toUpperCase())) {
             return setProducts(products => [...products, product]);
           }
@@ -74,7 +74,7 @@ const ItemList = ({ category = 'listAll' }) => {
   }, [category])
 
   return (
-    <div className="container-cards">
+    <div className="main-container">
       {(category === "listAll")&&(!showCircularProgress) && <h1>Listado completo de productos</h1>}
       {(category !== "listAll")&&(!showCircularProgress) && (products.length > 0)&& <h1>Productos: '{category}'</h1>}
       {(category !== "listAll")&&(!showCircularProgress) && (products.length == 0)&& <h1>No hay productos para la búsqueda realizada</h1>}

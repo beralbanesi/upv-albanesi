@@ -8,8 +8,7 @@ export default function Item({productData})
 {
     const {addProductToCart} = useContext(CartContext);
     const onAdd = (qty) => {
-        addProductToCart(productData,qty);
-        // alert(`Se agregaron ${qty}  productos`);
+        addProductToCart(productData, qty);      
     }
    
     const {id, title, price, image, stock} = productData;

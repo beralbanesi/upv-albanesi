@@ -1,0 +1,14 @@
+.leftColumn {
+    width: 50%; 
+    float: left;
+}
+
+.rightColumn {
+    width: 50%; 
+    float: right;
+}
+
+.columnElement {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}

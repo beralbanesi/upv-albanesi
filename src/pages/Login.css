@@ -1,0 +1,10 @@
+.errorMessage {
+    color: #EE2222;
+}
+
+div > .registerHere a {
+    color: blue !important;
+    background: inherit;    
+    background-color: inherit;
+    box-shadow: none;
+}

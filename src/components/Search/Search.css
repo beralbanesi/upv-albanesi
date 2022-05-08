@@ -1,0 +1,9 @@
+.custom-input{
+    border-radius: 5px;
+    background-color: #1f4274aa; /* color del que queda la lupa */
+    color: white;
+}
+
+.custom-input:hover{
+    color: white;
+} 

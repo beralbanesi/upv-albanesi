@@ -1,11 +1,30 @@
-.item-cart-modal__img {
+a {
+  box-shadow: 1px 1px 10px #00000033;
+}
+
+.order-number{
+  color: green;
+}
+
+.item-img {
     border: 1px solid #ababab;
     border-radius: 5px;
     height: 100px;
-    box-shadow: '1px 1px 5px'; 
+    box-shadow: '1px 1px 5px';
+    transition: all 0.3s ease;
 }
 
-.item-cart-modal__info {
+.item-img:hover{
+  transform: scale(1.03);
+}
+
+/* .orderForm {
+  display: flexbox;
+  width: 100%;
+  height: 100%;
+} */
+
+/* .item-cart-modal__info {
     width: 60%;
     height: 100px;
     padding-left: 10px;
@@ -14,43 +33,14 @@
 
  .item-cart-modal__action {
     width: 10%;
-}
+} */
 
-th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignRight.MuiTableCell-sizeMedium.css-1nslmh4-MuiTableCell-root {
+/* th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignRight.MuiTableCell-sizeMedium.css-1nslmh4-MuiTableCell-root {
   border: none;
 }
-
-.continue-btn {
-  background-color: #1F4374;
-  color: white;
-  margin-top: 5px;
-  margin-left: 5%;
-  font-size: 14px;
-  border-radius: 5px;
-  height: 40px;
-  width: 160px;
-}
-
-div > button.continue-btn a{
-  color:white;
-  text-decoration: none;
-}
   
-.orderForm {
-  display: flexbox;
-  width: 100%;
-  height: 100%;
-
-}
-
-.orderNumber{
-  color: green;
-}
-
 div > form > div > button.pay-btn{
   box-shadow: '1px 1px 5px';
  text-transform: uppercase;
- /* margin: 1, textTransform: 'uppercase', width: '15%', cursor: 'pointer', backgroundColor: '#1F4374', color: 'white' },
-  { '&:hover': { backgroundColor: '#107BD4', transform: 'scale(1.03)' } } */
 }
-
+ */

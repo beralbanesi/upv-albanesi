@@ -1,8 +1,9 @@
+import './Search.css';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Search = ({handleInputClick, handleKeyPress}) => {
+const Search = ({handleKeyPress}) => {
     /*Barra de busqueda*/
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -32,8 +33,7 @@ const Search = ({handleInputClick, handleKeyPress}) => {
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
+            padding: theme.spacing(1, 1, 1, 0),           
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             transition: theme.transitions.create('width'),
             width: '100%',
@@ -48,11 +48,10 @@ const Search = ({handleInputClick, handleKeyPress}) => {
   
     return (
         <Search >
-            <SearchIconWrapper className='search-icon'>
+            <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase className='custom-input'
-                onClick={(e) => { handleInputClick(e) }}  
                 onKeyPress={(e) => {handleKeyPress(e)}}             
                 placeholder="Buscar..."
                 inputProps={{ 'aria-label': 'search' }}

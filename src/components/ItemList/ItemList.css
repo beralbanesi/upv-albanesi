@@ -1,0 +1,12 @@
+.circular-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
+
+/* Para mantener los items del listado completo del mismo tamaño */
+div > p{
+  height: 50px;
+}
